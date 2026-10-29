@@ -1,0 +1,5 @@
+[
+  {"id": "sku-001", "name": "Cloud Runner", "category": "shoes", "price": 120.0, "currency": "USD", "inventory": 18},
+  {"id": "sku-002", "name": "Trail Shell Jacket", "category": "outerwear", "price": 180.0, "currency": "USD", "inventory": 7},
+  {"id": "sku-003", "name": "Everyday Pack", "category": "bags", "price": 75.0, "currency": "USD", "inventory": 31}
+]
