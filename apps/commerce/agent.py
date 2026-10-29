@@ -1,5 +1,5 @@
 from common.adk_helpers import llm_agent
-from .tools import get_product, search_products
+from .tools import calculate_cart, create_order_preview, get_product, search_products
 
 
 root_agent = llm_agent(
@@ -10,5 +10,5 @@ the catalog tools. Never claim an item is available unless the catalog says so. 
 confirm the product, quantity, price, and shipping assumptions. This reference implementation does not
 process payments or place orders; clearly say when an action requires a checkout integration.
 """,
-    tools=[search_products, get_product],
+    tools=[search_products, get_product, calculate_cart, create_order_preview],
 )

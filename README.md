@@ -1,49 +1,40 @@
 # ADK Production Agent Suite
 
-A multi-agent reference project built with Google Agent Development Kit (ADK). The suite demonstrates lead research, Gemini CLI integration, MCP-based bug assistance, automated code review, and e-commerce workflows.
+Production-oriented reference implementations built with Google ADK, MCP, Gemini CLI, and cloud-native deployment patterns.
 
-## Project Goals
+This repository is a runnable reference suite: each agent exposes an ADK `root_agent`, local tools are
+tested deterministically, and external side effects such as payments, CRM writes, and file mutation are
+explicitly gated.
 
-This project demonstrates how to:
+## Agents
 
-- Build modular agents with Google ADK
-- Connect agents to local tools
-- Use Gemini CLI inside an ADK pipeline
-- Integrate MCP-style tools for software assistance
-- Create structured code-review outputs
-- Implement product search, cart, and checkout workflows
-- Organize an agent project for testing and future cloud deployment
-
-## Included Agents
-
-| Agent | Description | Local command |
+| Agent | Purpose | Local entrypoint |
 |---|---|---|
-| Lead Researcher | Creates a structured company and lead research brief | `python -m apps.lead_researcher` |
-| Gemini CLI Pipeline | Invokes Gemini CLI as a controlled tool inside an agent pipeline | `python -m apps.gemini_cli_agent` |
-| Bug Assistant | Helps inspect symptoms, reproduce issues, and explain possible fixes | `python -m apps.bug_assistant` |
-| Code Review Assistant | Produces severity-ranked findings and improvement suggestions | `python -m apps.code_review` |
-| Commerce Agent | Supports product discovery, cart operations, and order workflows | `python -m apps.commerce` |
+| Lead Researcher | Researches public company evidence and produces a qualified lead brief | `adk web apps/lead_researcher` |
+| Gemini CLI Pipeline | Uses Gemini CLI as a controlled ADK tool | `adk web apps/gemini_cli_agent` |
+| Bug Assistant | Uses safe workspace tools and the standalone MCP server to inspect and explain software bugs | `adk web apps/bug_assistant` |
+| Code Review Assistant | Performs structured, severity-ranked code review | `adk web apps/code_review` |
+| Commerce Agent | Product discovery, cart totals, and a non-payment order preview | `adk web apps/commerce` |
 
-## Repository Structure
+## Quick start
 
-```text
-adk-production-agent-suite/
-├── apps/
-│   ├── bug_assistant/
-│   ├── code_review/
-│   ├── commerce/
-│   ├── gemini_cli_agent/
-│   └── lead_researcher/
-├── common/
-│   ├── config.py
-│   └── adk_helpers.py
-├── data/
-│   └── products.json
-├── docs/
-│   ├── SETUP.md
-│   └── VIDEO_WALKTHROUGH.md
-├── tests/
-├── .env.example
-├── pyproject.toml
-├── requirements.txt
-└── README.md
+```bash
+cp .env.example .env
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m pytest -q
+```
+
+Set `GOOGLE_API_KEY` or configure Vertex AI in `.env` before running the agents. Never commit `.env`, API keys, access tokens, customer data, or generated reports.
+
+Detailed setup, architecture, deployment, and the video walkthrough script are in [`docs/`](docs/).
+
+## Demonstrated safety boundaries
+
+- Lead research labels evidence versus inference and uses public URLs only.
+- Gemini CLI has an explicit working directory and timeout.
+- Bug tools reject workspace path traversal.
+- Code review includes deterministic secret and shell-risk checks before an LLM review.
+- Commerce returns a transparent cart and `PENDING_CHECKOUT` preview; it never processes payment.
+- The MCP server runs over stdio and exposes narrowly scoped tools.

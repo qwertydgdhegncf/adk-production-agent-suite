@@ -28,6 +28,20 @@ adk web apps/lead_researcher
 adk web apps/code_review
 ```
 
+The lead researcher is also an ADK package:
+
+```bash
+adk web apps/lead_researcher
+```
+
+Run the standalone MCP server over stdio:
+
+```bash
+python -m mcp_server
+```
+
+It exposes `list_files`, `read_file`, and `triage_symptom`, while rejecting path traversal.
+
 The Python modules also expose `root_agent` for embedding in an ADK runner or deployment service.
 
 ## Safety notes
