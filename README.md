@@ -7,8 +7,6 @@ A multi-agent application built with the Google Agent Development Kit (ADK). Thi
 🎥 **Complete execution walkthrough:**  
 [Watch the YouTube walkthrough](https://youtu.be/HmIwnoQ-oGo)
 
-> After uploading the recording to YouTube as **Unlisted**, replace `PASTE_YOUTUBE_VIDEO_LINK_HERE` with your actual YouTube URL.
-
 ## GitHub Repository
 
 [View the source code on GitHub](https://github.com/qwertydgdhegncf/adk-production-agent-suite)
